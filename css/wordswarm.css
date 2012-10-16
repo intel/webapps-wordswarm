@@ -1,0 +1,1032 @@
+/*
+ * Copyright (c) 2012, Intel Corporation.
+ *
+ * This program is licensed under the terms and conditions of the  
+ * Apache License, version 2.0.  The full text of the Apache License is at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+
+@font-face {
+    font-family: 'Oswald';
+    src: url(../fonts/Oswald.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Lato Black';
+    src: url(../fonts/Lato-Black.ttf) format('truetype');
+}
+
+body {
+    background-position: left top;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+    -webkit-user-select: none;
+    box-shadow: 5px 5px 20px black;
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    overflow: hidden;
+    cursor: default;
+    width: 1024px;
+    height: 600px;
+}
+
+/* 800 x 480 */
+@media (orientation: landscape) {
+  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(0.78125, 0.8); }
+}
+/* 1024 x 600 */
+@media (min-width: 1024px) and (min-height: 600px) and (orientation: landscape) {
+  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); }
+}
+/* 1280 x 720 */
+@media (min-width: 1280px) and (min-height: 720px) and (orientation: landscape) {
+  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(1.25, 1.199); }
+}
+
+/* 480 x 800 */
+@media (orientation: portrait) {
+  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.8, 0.78125); }
+}
+/* 600 x 1024 */
+@media (min-width: 600px) and (min-height: 1024px) and (orientation: portrait) {
+  body { top: 0%; left: 0%; -webkit-transform: translate(-50%, -50%) rotate(90deg) translate(50%, -50%); }
+}
+/* 720 x 1230 */
+@media (min-width: 720px) and (min-height: 1230px) and (orientation: portrait) {
+  body { top: 0%; left: 0%; -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(1.2, 1.199) translate(50%, -50%); }
+}
+/* 720 x 1280 */
+@media (min-width: 720px) and (min-height: 1280px) and (orientation: portrait) {
+  body { top: 0%; left: 0%; -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(1.25, 1.199) translate(50%, -50%); }
+}
+
+
+.dialogBackground {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1024px;
+    height: 600px;
+    -webkit-transition: background-color 0.5s;
+    background-color: rgba(0,0,0,.33);
+    pointer-events: auto;
+    z-index: 99;
+}
+
+
+/* main menu page */
+
+#main_page {
+    background: url(../images/MainMenu-background.png);
+    margin: 0px;
+    padding: 0px;
+    width: 1024px;
+    height: 600px;
+}
+
+#main_bee {
+    position: absolute;
+    top: 124px;
+    left: 446px;
+    width: 141px;
+    height: 152px;
+    background: url(../images/Bee-MainMenu.png);
+}
+
+.main_wings {
+    position: absolute;
+    top: 169px;
+    left: 462px;
+    height: 90px;
+}
+
+#main_wings_static {
+    width: 106px;
+    background: url(../images/Wings-MainMenu-Static.png) no-repeat;
+}
+
+#main_wings_mid_state {
+    display: none;
+    left: 452px;
+    width: 133px;
+    background: url(../images/Wings-MainMenu-midState.png) no-repeat;
+}
+
+#main_wings_buzzing_state {
+    display: none;
+    width: 133px;
+    left: 447px;
+    background: url(../images/Wings-MainMenu-buzzing.png) no-repeat;
+}
+   
+.main_button_left {
+    position: absolute;
+    bottom: 12px;
+    width: 45px;
+    height: 60px;
+    background: url(../images/SilverButton-leftcurve.png);
+}
+
+.main_button_center {
+    position: absolute;
+    bottom: 32px;
+    height: 40px;
+    background: url(../images/SilverButton-centervertical.png) repeat-x;
+}
+
+.main_button_right {
+    position: absolute;
+    bottom: 12px;
+    width: 45px;
+    height: 60px;
+    background: url(../images/SilverButton-rightcurve.png);
+}
+
+#main_play_button_left {
+    left: 250px;
+}
+
+#main_play_button_center {
+    left: 290px;
+    width: 100px;
+}
+
+#main_play_button_right {
+    left: 385px;
+}
+
+.main_button_text {
+    font: 14pt "Lato Black";
+    text-align: center;
+    line-height: 160%;
+    color: #393739;
+    z-index: 2;
+}
+
+.main_button_text:hover, .main_button_text:active {
+    color: #b15c12;
+    cursor: pointer;
+}
+
+#main_buzz_off_button_left {
+    left: 403px;
+}
+
+#main_buzz_off_button_center {
+    left: 448px;
+    width: 100px;
+}
+
+#main_buzz_off_button_right {
+    left: 544px;
+}
+
+#main_how_to_button_left {
+    left: 560px;
+}
+
+#main_how_to_button_center {
+    left: 605px;
+    width: 150px;
+}
+
+#main_how_to_button_right {
+    left: 755px;
+}
+
+/* Game page */
+
+#game_page {
+    display: none;
+    margin: 0px;
+    padding: 0px;
+    width: 1024px;
+    height: 600px;
+    background: url(../images/GameBoard-background.png);
+    overflow: hidden;
+}
+
+#game_1player_bee_big_image {
+    position: absolute;
+    display: none;
+    left: 380px;
+    top: 432px;
+    width: 254px;
+    height: 274px;
+    -webkit-animation: bottomToCenter 1s linear;
+    background: url(../images/Bee-1player-big.png);
+}
+
+@-webkit-keyframes bottomToCenter {
+    0% {top: 432px;}
+    100% {top: 180px;}
+}
+
+#game_honeycomb_grey {
+    display: none;
+    position: absolute;
+    top: 61px;
+    left: 218px;
+    width: 553px;
+    height: 478px;
+    background: url(../images/HoneycombMatrix-Grey.png);
+}
+
+#game_honeycomb_darkbrown {
+    display: none;
+    position: absolute;
+    top: 61px;
+    left: 218px;
+    width: 553px;
+    height: 478px;
+    background: url(../images/HoneycombMatrix-DarkBrown.png);
+}
+
+#game_go_window_1player {
+    display: none;
+    position: absolute;
+    top: 184px;
+    left: 360px;
+    width: 269px;
+    height: 232px;
+    background: url(../images/GoWindow-1player.png);
+}
+
+#game_slider {
+    position: absolute;
+    top: 253px;
+    right: 39px;
+    width: 14px;
+    height: 30px;
+    background: url(../images/Slider.png);
+}
+
+#game_clock {
+    position: absolute;
+    top: 48px;
+    right: 146px;
+    font-family: courier, monospace;
+    font-size: 28px;
+    color: #ffc220;
+}
+
+#game_dash_left {
+    position: absolute;
+    bottom: 370px;
+    right: 184px;
+    width: 27px;
+    height: 1px;
+    background: #ffc220;
+}
+
+#game_label_hive {
+    position: absolute;
+    bottom: 360px;
+    right: 72px;
+    font-family: "Lato Black";
+    font-size: 18px;
+    color: #929497;
+}
+
+#game_dash_right {
+    position: absolute;
+    bottom: 370px;
+    right: 37px;
+    width: 27px;
+    height: 1px;
+    background: #ffc220;
+}
+
+#game_score {
+    position: absolute;
+    bottom: 392px;
+    right: 95px;
+    font-family: Oswald;
+    font-size: 44pt;
+    color: #393739;
+}
+
+#game_words {
+    position: absolute;
+    bottom: 162px;
+    right: 55px;
+    width: 160px;
+    height: 176px;
+}
+
+.game_answerText {
+    position: absolute;
+    font-family: "Lato black";
+    width: 18px;
+    margin-right: 1px;
+    text-align: center;
+    font-size: 12pt;
+    color: #ffffff;
+    border-bottom: 3px ridge #aeaeae;
+}
+
+#game_score_label {
+    position: absolute;
+    bottom: 411px;
+    right: 50px;
+    font-family: "Lato Black";
+    font-size: 15pt;
+    color: #393739;
+}
+
+#game_level_label {
+    position:absolute;
+    bottom: 90px;
+    right: 75px;
+    font: 20pt "Lato Black";
+    color: #393739;
+}
+
+#game_label_life {
+    position: absolute;
+    bottom: 136px;
+    left: 72px;
+    font-family: "Lato Black";
+    font-size: 21pt;
+    color: #393739;
+}
+
+#game_go_window_label_level {
+    position: absolute;
+    top: 30px;
+    left: 98px;
+    font-family: "Lato Black";
+    font-size: 14pt;
+    color: #ffc220;
+}
+
+#game_go_window_label_on {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    font-family: Oswald;
+    font-size: 35px;
+    color: #e0e0e1;
+}
+
+#game_go_window_label_bee {
+    position: absolute;
+    top: 105px;
+    left: 60px;
+    font-family: Oswald;
+    font-size: 35px;
+    color: #ffc220;
+}
+
+#game_go_window_label_go {
+    position: absolute;
+    top: 170px;
+    left: 100px;
+    font-family: "Lato Black";
+    font-size: 29pt;
+    color: #393739;
+}
+
+#game_honey_container {
+    position: absolute;
+    display: none;
+    bottom: 182px;
+    left: 66px;
+    width: 69px;
+    height: 200px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ffc220), color-stop(1, #ffffff));
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    -webkit-border-bottom-right-radius: 15px;
+}
+
+#game_honeycombs, #game_bees {
+    position: absolute;
+    display: none;
+    top: 61px;
+    left: 218px;
+    width: 553px;
+    height: 478px;
+}
+
+.game_honeycomb {
+    position: absolute;
+    width: 130px;
+    height: 114px;
+    background: url(../images/HoneyComb-hexagon.png);
+}
+
+.game_honeycomb_selected {
+    background: url(../images/HoneyComb-hexagon-rollover.png);
+}
+
+.game_letter {
+    position: absolute;
+    width: 66px;
+    height: 114px;
+    text-align: center;
+    font-family: "Lato Black";
+    font-size: 57pt;
+    line-height: 140%;
+    color: #221e1f;
+}
+
+.game_letter_column1 { left: 45px; }
+.game_letter_column2 { left: 145px; }
+.game_letter_column3 { left: 246px; }
+.game_letter_column4 { left: 347px; }
+.game_letter_column5 { left: 448px; }
+
+.game_honeycomb_column1 { left: 9px; }
+.game_honeycomb_column2 { left: 111px; }
+.game_honeycomb_column3 { left: 212px; }
+.game_honeycomb_column4 { left: 313px; }
+.game_honeycomb_column5 { left: 414px; }
+
+.game_honeycomb_row1 { top: 7px; }
+.game_honeycomb_row2 { top: 64px; }
+.game_honeycomb_row3 { top: 124px; }
+.game_honeycomb_row4 { top: 182px; }
+.game_honeycomb_row5 { top: 240px; }
+.game_honeycomb_row6 { top: 298px; }
+.game_honeycomb_row7 { top: 357px; }
+
+.game_bee {
+    position: absolute;
+    width: 100px;
+    height: 116px;
+    background: url(../images/Bee-regularsize.png);
+}
+
+.game_bee_wings {
+    position: absolute;
+    width: 73px;
+    height: 63px;
+    background: url(../images/Wings-RegularSize-Static.png);
+    -webkit-animation: showBeeWings 4.5s linear;
+}
+
+@-webkit-keyframes showBeeWings {
+    0% { width: 73px; background: url(../images/Wings-RegularSize-Static.png);}
+    10% {margin-left: -4px; width: 84px; background: url(../images/Wings-RegularSize-MidState.png);}
+    15% {margin-right: -16px; width: 97px; background: url(../images/Wings-RegularSize-buzzing.png);}
+    75% {margin-left: -4px; width: 84px; background: url(../images/Wings-RegularSize-MidState.png);}
+    90% {width: 73px; background: url(../images/Wings-RegularSize-Static.png);}
+}
+
+.game_bee_wings_column1 { left: 40px; }
+.game_bee_wings_column2 { left: 143px; }
+.game_bee_wings_column3 { left: 244px; }
+.game_bee_wings_column4 { left: 345px; }
+.game_bee_wings_column5 { left: 446px; }
+
+.game_bee_wings_row1 { top: 35px; }
+.game_bee_wings_row2 { top: 90px; }
+.game_bee_wings_row3 { top: 152px; }
+.game_bee_wings_row4 { top: 208px; }
+.game_bee_wings_row5 { top: 266px; } 
+.game_bee_wings_row6 { top: 327px; }
+.game_bee_wings_row7 { top: 384px; }
+
+.game_bee_column1 { left: 23px; }
+.game_bee_column2 { left: 126px; }
+.game_bee_column3 { left: 227px; }
+.game_bee_column4 { left: 328px; }
+.game_bee_column5 { left: 429px; }
+
+.game_bee_row1 { top: 5px; }
+.game_bee_row2 { top: 58px; }
+.game_bee_row3 { top: 120px; }
+.game_bee_row4 { top: 178px; }
+.game_bee_row5 { top: 236px; }
+.game_bee_row6 { top: 295px; }
+.game_bee_row7 { top: 352px; }
+
+#game_setting {
+    position: absolute;
+    right: 0px;
+    bottom: 13px;
+    width: 65px;
+    height: 42px;
+    background: url(../images/Settings-button.png);
+}
+
+#game_setting:hover, #game_setting:active {
+    cursor: pointer;
+    background: url(../images/Settings-button-rollover.png);
+}
+
+#game_pause_btn {
+    position: absolute;
+    display: none;
+    bottom: 22px;
+    left: 447px;
+    width: 95px;
+    height: 80px;
+    background: url(../images/Pause-button.png);
+}
+
+#game_pause_btn:hover, #game_pause_btn:active {
+    cursor: pointer;
+    background: url(../images/Pause-button-rolloverstate.png);
+}
+
+/* pause window*/
+
+#pause_page {
+    display: none;
+}
+
+#game_pause_window {
+    position: absolute;
+    top: 184px;
+    left: 360px;
+    width: 269px;
+    height: 232px;
+    background: url(../images/PauseWindow.png);
+}
+
+#game_pause_window_label_level {
+    position: relative;
+    top: 34px;
+    left: 98px;
+    font-family: "Lato Black";
+    font-size: 14pt;
+    color: #ffc220;
+}
+
+#game_pause_window_label_pause {
+    position: absolute;
+    top: 62px;
+    left: 80px;
+    font-family: Oswald;
+    font-size: 35px;
+    color: #e0e0e1;
+}
+
+#game_pause_window_label_resume {
+    position: absolute;
+    top: 125px;
+    left: 60px;
+    font-family: "Lato Black";
+    font-size: 16.5pt;
+    color: #393739;
+}
+
+#game_pause_window_label_home {
+    position: absolute;
+    top: 180px;
+    left: 70px;
+    font-family: "Lato Black";
+    font-size: 16.5pt;
+    color: #393739;
+}
+
+#game_pause_window_label_resume:hover,
+#game_pause_window_label_resume:active,
+#game_pause_window_label_home:hover,
+#game_pause_window_label_home:active {
+    cursor: pointer;
+}
+
+/* setting page */
+
+#setting_page {
+    display: none;
+}
+
+#setting_popup {
+    position: absolute;
+    top: 191px;
+    left: 291px;
+    width: 409px;
+    height: 218px;
+    background: url(../images/SettingsWindow.png);
+}
+
+#setting_sound_effects_label {
+    position: absolute;
+    top: 237px;
+    left: 331px;
+    font-family: "Lato Black";
+    font-size: 18pt;
+    color: #393739;
+}
+
+#setting_sound_effects_switch {
+    position: absolute;
+    top: 226px;
+    left: 536px;
+    width: 62px;
+    height: 52px;
+    background: url(../images/Settings-Slider.png);
+}
+
+#setting_sound_effects_switch_on {
+    position: absolute;
+    top: 241px;
+    left: 550px;
+    font-family: "Lato Black";
+    font-size: 14pt;
+    color: #393739;
+}
+
+#setting_sound_effects_switch_off {
+    position: absolute;
+    top: 241px;
+    left: 608px;
+    font-family: "Lato Black";
+    font-size: 14pt;
+    color: #575758;
+}
+
+#setting_theme_music_label {
+    position: absolute;
+    top: 330px;
+    left: 341px;
+    font-family: "Lato Black";
+    font-size: 18pt;
+    color: #393739;
+}
+
+#setting_theme_music_switch {
+    position: absolute;
+    top: 320px;
+    left: 536px;
+    width: 62px;
+    height: 52px;
+    background: url(../images/Settings-Slider.png);
+}
+
+#setting_theme_music_switch_on {
+    position: absolute;
+    top: 332px;
+    left: 550px;
+    font-family: "Lato Black";
+    font-size: 14pt;
+    color: #393739;
+}
+
+#setting_theme_music_switch_off {
+    position: absolute;
+    top: 332px;
+    left: 608px;
+    font-family: "Lato Black";
+    font-size: 14pt;
+    color: #575758;
+}
+
+#setting_done_button_left {
+    position: absolute;
+    left: 400px;
+    top: 410px !important;
+}
+
+#setting_done_button_center {
+    position: absolute;
+    display: inline;
+    left: 444px;
+    width: 100px;
+    height: 40px;
+    top: 410px !important;
+    text-align: center;
+    line-height: 160%;
+    font-family: "Lato Black";
+    font-size: 16.5pt;
+    color: #393739;
+}
+
+#setting_done_button_right {
+    position: absolute;
+    left: 544px;
+    top: 410px !important;
+}
+
+/* how to page */
+
+#howto_page {
+    position: absolute;
+    display: none;
+    margin: 0px;
+    padding: 0px;
+    width: 1024px;
+    height: 600px;
+    background: url(../images/HowToPlay-background.png);
+}
+
+#howto_h1 {
+    padding-top: 80px;
+    margin-left: 100px;
+    font: 30px Oswald;
+    color: #ffc220
+}
+
+#howto_h2 {
+    margin-left: 100px;
+    font: 20px Oswald;
+    color: #ffffff;
+}
+
+#howto_main_menu_button_left {
+    left: 400px;
+}
+
+#howto_main_menu_button_center {
+    left: 445px;
+    width: 135px !important;
+}
+
+#howto_main_menu_button_right {
+    left: 580px;
+}
+
+#howto_bee_top {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    width: 106px;
+    height: 116px;
+    background: url(../images/Bee-withBuzzingWings.png);
+    -webkit-transform: rotate(45deg)
+}
+
+ul.help_text {
+    list-style-image: url(../images/BulletPoint-Hexagon.png);
+}
+
+ul li {
+    font: 18px Oswald;
+    margin: 10px 15px 0px 80px;
+    color: #ffffff;
+}
+
+#wrong_guess {
+    position: absolute;
+    display: none;
+    top: 208px;
+    left: 407px;
+    width: 177px;
+    height: 183px;
+    background: url(../images/X-wrongword.png);
+}
+
+#game_level_completed_msg {
+    position: absolute;
+    display: none;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font: 50pt "Lato Black";
+    color: white;
+    -webkit-animation: blink 2s linear infinite;
+}
+
+@-webkit-keyframes blink {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.gameover_window {
+    position: absolute;
+    top: 184px;
+    left: 360px;
+    width: 269px;
+    height: 232px;
+    background: url(../images/PauseWindow.png);
+}
+
+.gameover_play_again {
+    position: absolute;
+    top: 130px;
+    left: 70px;
+    font: 16.5pt "Lato Black";
+    color: #393739;
+}
+
+.gameover_menu_home {
+    position: absolute;
+    top: 180px;
+    left: 70px;
+    font: 16.5pt "Lato Black";
+    color: #393739;
+}
+
+.gameover_menu_home:hover, .gameover_menu_home:active,
+.gameover_play_again:hover, .gameover_play_again:active {
+    cursor: pointer;
+}
+
+/*  gameover window for 1 player game */
+#gameover_1player_window {
+    display: none;
+}
+
+#gameover_1player_score {
+    position: absolute;
+    top: 25px;
+    right: 120px;
+    font: 35pt "Oswald";
+    color: #e0e0e1;
+}
+
+#gameover_1player_score_label {
+    position: absolute;
+    top: 60px;
+    left: 160px;
+    font: 15pt "Lato Black";
+    color: #e0e0e1;
+}
+
+#gameover_1player_level_reached {
+    position: absolute;
+    top: 85px;
+    left: 45px;
+    font: 15pt "Lato Black";
+    color: #ffc220;
+}
+
+/* two players element */
+
+.game_bee_buzz_off {
+    display: none;
+    position: absolute;
+    top: 200px;
+    width: 213px;
+    height: 197px;
+}
+
+#game_bee_buzz_off_left {
+    left: 140px;
+    -webkit-animation: leftToCenter 2s linear;
+    background: url(../images/Bee-BuzzOff-Left.png);
+}
+
+@-webkit-keyframes leftToCenter {
+    0% {left: 140px;}
+    100% {left: 330px;}
+}
+
+#game_bee_buzz_off_right {
+    right: 205px;
+    -webkit-animation: rightToCenter 2s linear;
+    background: url(../images/Bee-BuzzOff-Right.png);
+}
+
+@-webkit-keyframes rightToCenter {
+    0% {right: 205px;}
+    100% {right: 330px;}
+}
+
+#game_player1_label {
+    position: absolute;
+    display: none;
+    top: 20px;
+    width: 130px;
+    left: 200px;
+    font: 20pt "Lato Black";
+    text-decoration: blink;
+    overflow: hidden;
+}
+
+#game_player1_score {
+    position: absolute;
+    display: none;
+    width: 130px;
+    top: 50px;
+    left: 200px;
+    font: 20pt "Lato Black";
+    text-align: center;
+}
+
+#game_player2_label {
+    position: absolute;
+    display: none;
+    top: 20px;
+    width: 130px;
+    left: 665px;
+    font: 20pt "Lato Black";
+}
+
+#game_player2_score {
+    position: absolute;
+    display: none;
+    top: 50px;
+    width: 130px;
+    left: 665px;
+    text-align: center;
+    font: 20pt "Lato Black";
+}
+
+#game_go_2players {
+    display: none;
+    position: absolute;
+    top: 184px;
+    left: 360px;
+    width: 269px;
+    height: 232px;
+    background: url(../images/GoWindow-BuzzOff.png);
+}
+
+#game_go_2players_level {
+    position: absolute;
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    font: 14pt "Lato Black";
+    color: #ffc220;
+}
+
+#game_go_2players_buzz_off {
+    position: absolute;
+    margin-top: 52px;
+    width: 100%;
+    text-align: center;
+    font: 34pt "Oswald";
+    color: #e0e0e1;
+}
+
+#game_go_2players_ready {
+    position: absolute;
+    margin-top: 105px;
+    width: 100%;
+    text-align: center;
+    font: 24pt "Oswald";
+    color: #ffc220;
+}
+
+#game_go_2players_id {
+    position: absolute;
+    margin-top: 160px;
+    width: 100%;
+    text-align: center;
+    font: 14pt "Lato Black";
+    color: #393739;
+}
+
+#game_go_2players_go {
+    position: absolute;
+    margin-top: 180px;
+    width: 100%;
+    text-align: center;
+    font: 29pt "Lato Black";
+    color: #393739;
+}
+
+#game_go_2players_go:hover, #game_go_2players_go:active {
+    cursor: pointer;
+}
+
+#gameover_2players_window {
+    display: none;
+}
+
+#gameover_2players_id {
+    position: absolute;
+    margin-top: 28px;
+    width: 100%;
+    text-align: center;
+    font: 24pt "Oswald";
+    color: #e0e0e1;
+}
+
+#gameover_2players_win_label {
+    position: absolute;
+    margin-top: 60px;
+    width: 100%;
+    text-align: center;
+    font: 30pt "Oswald";
+    color: #ffc220;
+}
+
+#first_player_score_window {
+    display: none;
+    background: url(../images/PlayerOneScoreWindow.png);
+}
+
+#first_player_score {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    text-align: center;
+    font: 28pt "OSwald";
+    color: #e0e0e1;
+}
+
+#first_player_id_label {
+    position: absolute;
+    top: 110px;
+    width: 100%;
+    text-align: center;
+    font: 30pt "OSwald";
+    color: #e0e0e1;
+}

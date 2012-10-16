@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--
+ * Copyright (c) 2012, Intel Corporation.
+ *
+ * This program is licensed under the terms and conditions of the
+ * Apache License, version 2.0.  The full text of the Apache License is at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+-->
+
+<html> 
+  <head> 
+    <meta name="viewport" content="width=device-width target-densitydpi=device-dpi initial-scale=1 maximum-scale=1 user-scalable=0" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>WordSwam</title> 
+
+    <link rel="stylesheet" type="text/css" href="css/wordswarm.css" />
+    <link rel="stylesheet" type="text/css" href="css/license.css" />
+  </head> 
+ 
+  <body>
+
+    <!-- Main menu page-->
+    <div id="main_page">
+        <div id="licensebtnl"> i </div>
+        <div id="main_bee"></div>
+        <div id="main_wings_static" class="main_wings"></div>
+        <div id="main_wings_mid_state" class="main_wings"></div>
+        <div id="main_wings_buzzing_state" class="main_wings"></div>
+
+        <div id="main_1player_button">
+            <div id="main_play_button_left" class="main_button_left"></div>
+            <div id="main_play_button_center" class="main_button_center main_button_text">1 PLAYER</div>
+            <div id="main_play_button_right" class="main_button_right"></div>
+        </div>
+
+        <div id="main_2players_button">
+            <div id="main_buzz_off_button_left" class="main_button_left"></div>
+            <div id="main_buzz_off_button_center" class="main_button_center main_button_text">2 PLAYERS</div>
+            <div id="main_buzz_off_button_right" class="main_button_right"></div>
+        </div>
+
+        <div id="main_how_to_button">
+            <div id="main_how_to_button_left" class="main_button_left"></div>
+            <div id="main_how_to_button_center" class="main_button_center main_button_text">HOW TO PLAY</div>
+            <div id="main_how_to_button_right" class="main_button_right"></div>
+        </div>
+    </div>
+
+    <div id="game_page">
+
+        <div id="game_1player_bee_big_image"> </div>
+        <div id="game_clock"></div>
+        <div id="game_dash_left"></div>
+        <div id="game_label_hive">IN THE HIVE</div>
+        <div id="game_dash_right"></div>
+        <div id="game_label_life">LIFE</div>
+        <div id="game_level_label"></div>
+        <div id="game_honeycomb_grey"> </div>
+        <div id="game_honeycomb_darkbrown"> </div>
+        <div id="game_slider"></div>
+        <div id="game_score"></div>
+        <div id="game_score_label">PTS.</div>
+        <div id="game_words"></div>
+        <div id="game_level_completed_msg"></div>
+
+        <!-- Go Window for 1 player -->
+        <div id="game_go_window_1player">
+            <div id="game_go_window_label_level">LEVEL 1</div>
+            <div id="game_go_window_label_on">BRING ON</div>
+            <div id="game_go_window_label_bee">THE BEES!</div>
+            <div id="game_go_window_label_go">GO</div>
+        </div>
+
+        <div id="game_honey_container"></div>
+        <div id="game_setting"></div>
+        <div id="game_honeycombs"></div>
+        <div id="game_pause_btn"></div>
+
+        <div id="game_bees"></div>
+
+        <!-- 2 players game elements -->
+        <div id="game_bee_buzz_off_left" class="game_bee_buzz_off"></div>
+        <div id="game_bee_buzz_off_right" class ="game_bee_buzz_off"></div>
+        <div id="game_player1_label">PLAYER 1</div>
+        <div id="game_player1_score"></div>
+        <div id="game_player2_label">PLAYER 2</div>
+        <div id="game_player2_score"></div>
+
+        <!-- Go Window for 2 players game -->
+        <div id="game_go_2players">
+            <div id="game_go_2players_level">LEVEL 1</div>
+            <div id="game_go_2players_buzz_off">BUZZ-OFF</div>
+            <div id="game_go_2players_ready">GET READY!</div>
+            <div id="game_go_2players_id"></div>
+            <div id="game_go_2players_go">GO</div>
+        </div>
+
+        <div id="first_player_score_window" class="gameover_window">
+            <div id="first_player_score"></div>
+            <div id="first_player_id_label">PLAYER 1</div>
+        </div>
+
+        <!-- Game Over Window for 2 players game -->
+        <div id="gameover_2players_window" class="gameover_window">
+            <div id="gameover_2players_id"></div>
+            <div id="gameover_2players_win_label"></div>
+            <div id="gameover_2players_play_again" class="gameover_play_again">PLAY AGAIN</div>
+            <div id="gameover_2players_menu_home" class="gameover_menu_home">MAIN MENU</div>
+        </div>
+
+        <!-- pause dialog -->
+        <div id="pause_page" class="dialogBackground">
+            <div id="game_pause_window">
+                <div id="game_pause_window_label_level">Level 1</div>
+                <div id="game_pause_window_label_pause">PAUSE</div>
+                <div id="game_pause_window_label_resume">RESUME GAME</div>
+                <div id="game_pause_window_label_home">MAIN MENU</div>
+            </div>
+        </div>
+
+        <!-- Game Over Window for single player game -->
+        <div id="gameover_1player_window" class="gameover_window">
+            <div id="gameover_1player_score"></div>
+            <div id="gameover_1player_score_label">PTS.</div>
+            <div id="gameover_1player_level_reached"></div>
+            <div id="gameover_1player_play_again" class="gameover_play_again">PLAY AGAIN</div>
+            <div id="gameover_1player_menu_home" class="gameover_menu_home">MAIN MENU</div>
+        </div>
+
+        <div id="wrong_guess"></div>
+    </div>
+
+    <div id="setting_page" class="dialogBackground">
+        <div id="setting_popup"></div>
+        <div id="setting_sound_effects_label">SOUND EFFECTS</div>
+        <div id="setting_sound_effects_switch_drag_area"></div>
+        <div id="setting_sound_effects_switch"></div>
+        <div id="setting_sound_effects_switch_on">ON</div>
+        <div id="setting_sound_effects_switch_off">OFF</div>
+        <div id="setting_theme_music_label">THEME MUSIC</div>
+        <div id="setting_theme_music_switch_drag_area"></div>
+        <div id="setting_theme_music_switch"></div>
+        <div id="setting_theme_music_switch_on">ON</div>
+        <div id="setting_theme_music_switch_off">OFF</div>
+        <div id="setting_done_button">
+            <div id="setting_done_button_left" class="main_button_left"></div>
+            <div id="setting_done_button_center" class="main_button_center">DONE</div>
+            <div id="setting_done_button_right" class="main_button_right"></div>
+        </div>
+    </div>
+
+    <div id="howto_page">
+        <div id="howto_bee_top"></div>
+        <div id="howto_h1">Find words and add them to your hive, collect the honey and stay alive!</div>
+        <div id="howto_h2">WordSwarm is a fast-paced word game that challenges you to connect letters, in the cells of the honeycomb, to form words before the honey level runs out.</div>
+        <ul class="help_text">
+            <li>When you start the game, the honey level begins to drop. Check out the list of words in your hive. Put your finger on one of the letters that begins a word in your list. Slide your finger across the screen as you select the connected, or adjacent, letters to complete that word.</li>
+            <li> When the letters have been selected, those cells in the honeycomb darken. Release your finger when you have completed the word.</li>
+            <li>If you have matched the right word, the letters for that word will disappear and you'll raise your honey level.</li>
+            <li>"Bee" careful. Choosing letters for the wrong word will cause an X to appear.</li>
+            <li>If you survive the time limit of the three rounds with honey still remaining, you advance to the next level!!</li>
+            <li>You can turn sound effects and theme music on or off in the settings screens.</li>
+        </ul>
+
+        <div id="howto_main_menu_button">
+            <div id="howto_main_menu_button_left" class="main_button_left"></div>
+            <div id="howto_main_menu_button_center" class="main_button_center main_button_text">MAIN MENU</div>
+            <div id="howto_main_menu_button_right" class="main_button_right"></div>
+        </div>
+    </div>
+
+    <div id="licensepage" style="display: none">
+        <div id="licensetext"></div>
+        <div id="licensebtnq" class="licensebtn">Back</div>
+    </div>
+
+    <!-- Audio Files -->
+    <audio class="themeMusic" loop="loop" preload="auto"><source src="audio/ThemeMusic.wav" type="audio/wav"></audio>
+
+    <!-- js Files -->
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/dialogs.js" type="text/javascript"></script>
+    <script src="js/license.js" type="text/javascript"></script>
+    <script src="js/randompath.js" type="text/javascript"></script>
+    <script src="js/gameclock.js" type="text/javascript"></script>
+    <script src="js/game.js" type="text/javascript"></script>
+    <script src="js/webappcommon.js" type="text/javascript"></script>
+    <script src="js/wordswarm.js" type="text/javascript"></script>
+  </body> 
+</html> 
