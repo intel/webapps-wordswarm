@@ -4,4 +4,5 @@
     <content src="index.html"/>
 <name>wordswarm</name>
 <tizen:application id="sxEjPCkwP1" required_version="1.0"/>
+<tizen:setting screen-orientation="landscape" contextmenu="enable"/>
 </widget>
