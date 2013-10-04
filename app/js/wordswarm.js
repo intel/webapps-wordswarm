@@ -199,6 +199,7 @@ function MainPage ()
 window.addEventListener('load', function () 
 {
     "use strict";
+    scaleBody(document.getElementsByTagName("body")[0], 720);
     webappCommon.useMouseEvents("mouseover");
     mainPage = new MainPage();
 });

@@ -1,0 +1,14 @@
+{
+  "name": "webapps-wordswarm",
+  "version": "1.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "lato-black-font": "http://www.ffonts.net/Lato-Black.font.zip",
+    "oswald-font": "http://ff.static.1001fonts.net/o/s/oswald.regular.ttf"
+  }
+}
