@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012, Intel Corporation.
  *
- * This program is licensed under the terms and conditions of the 
+ * This program is licensed under the terms and conditions of the
  * Apache License, version 2.0.  The full text of the Apache License is at
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -32,7 +32,7 @@ function Game() {
     var puzzlesCompleted;
     var gameClock;
 
-    function readWordList() 
+    function readWordList()
     {
         // read words list from file
         var file = "data/words.json";
@@ -55,7 +55,7 @@ function Game() {
                 continue;
             wordsUsed[i] = true;    // mark it used.
             return wordsDataList[i];
-        }   
+        }
     }
 
     function wordObject (word, cells)
@@ -66,8 +66,8 @@ function Game() {
 
     function getWords()
     {
-        var nChars = 17; 
-        var words = ""; 
+        var nChars = 17;
+        var words = "";
         myWordList = [];
 
         var n = 0;
@@ -84,12 +84,12 @@ function Game() {
                 var wordObj = new wordObject(word, cells);
                 myWordList.push(wordObj);
                 nChars -= len;
-            }   
-        }   
+            }
+        }
         return words;
     }
 
-    this.onGameOver = function onGameOver(callback) 
+    this.onGameOver = function onGameOver(callback)
     {
         handleGameOver = callback;
     }
@@ -141,7 +141,7 @@ function Game() {
     function wrongGuess (cells)
     {
         $("#wrong_guess").fadeIn();
-        setTimeout (function() { 
+        setTimeout (function() {
             $("#wrong_guess").fadeOut();
             unSelectCells(cells);
         }, 1000);
@@ -171,7 +171,7 @@ function Game() {
         }
         return true;
     }
- 
+
     function validateSelectedWord (cells)
     {
         var i;
@@ -202,7 +202,7 @@ function Game() {
             }
         }
         wrongGuess(cells);
-    } 
+    }
 
     function validateMove (e)
     {
@@ -252,13 +252,13 @@ function Game() {
 
     function showLevelCompletedMessage ()
     {
-        
+
         gameClock.reset();
         var e = $('#game_level_completed_msg');
         var message = "Level " + self.level + " Completed!";
         e.html(message);
         e.show();
-        setTimeout (function() { 
+        setTimeout (function() {
             e.hide();
             nextLevel();
         }, 3000);
@@ -320,10 +320,10 @@ function Game() {
         var html;
         for (j = 1; j < 6; j++) {
             for (i = 1; i < 8; i++) {
-                if ((((i % 2) != 0) && ((j % 2) === 0)) || 
+                if ((((i % 2) != 0) && ((j % 2) === 0)) ||
                     (((i % 2) === 0) && ((j % 2) != 0))) {
-                    html = '<div id="game_honeycomb_' + h + 
-                           '" class="game_honeycomb game_honeycomb_row' + i + 
+                    html = '<div id="game_honeycomb_' + h +
+                           '" class="game_honeycomb game_honeycomb_row' + i +
                            ' game_honeycomb_column' + j + '"></div>';
                     $('#game_honeycombs').append(html);
 
@@ -360,7 +360,7 @@ function Game() {
         gameClock = new GameClock(180);
         gameClock.onClockExpired(handleClockExpire);
         gameClock.onEachClockTick(handleClockTick);
-      
+
         // hook up the go button for 1 player
         $('#game_go_window_label_go').click (function () {
             $('#game_go_window_1player').fadeOut();
@@ -369,7 +369,7 @@ function Game() {
                 sounds.beesAppear.play();
             }
             setTimeout ('wordGame.newGame()', 4500);
-        });     
+        });
 
         // hook up the go button for 2 players
         $('#game_go_2players_go').click (function () {
@@ -380,19 +380,19 @@ function Game() {
                 sounds.beesAppear.play();
             }
             setTimeout ('wordGame.newGame()', 4500);
-        });     
+        });
 
         // hook up the setting button
         $('#game_setting').click (function() {
             gameClock.pause();
             settingDialog.onDialogClose(resume);
             settingDialog.open();
-        });     
+        });
 
         // hook up the pause button
         $('#game_pause_btn').click (function () {
             pauseDialog.open();
-        }); 
+        });
     }
 
     this.reset = function reset() {
@@ -470,9 +470,9 @@ function Game() {
                 var s = "&emsp;";
                 if (j === 0)
                     s = w.charAt(j);
-                   
-                html = '<div id="game_word' + (i+1) + '_char' + (j+1) + 
-                       '" class="game_answerText" style="' + top + 
+
+                html = '<div id="game_word' + (i+1) + '_char' + (j+1) +
+                       '" class="game_answerText" style="' + top +
                         ' left: ' + (j * 25 + 5) + 'px;">' + s + '</div>';
                 e.append(html);
             }
