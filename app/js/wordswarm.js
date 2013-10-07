@@ -12,7 +12,7 @@ var wordGame;
 var settingDialog;
 var mainPage;
 
-function MainPage () 
+function MainPage ()
 {
     var timer;
     var state=0; /* 0 for mid state and 1 for buzzing state */
@@ -20,8 +20,8 @@ function MainPage ()
     var dualPlayersGameOverDialog;
     var playerId;
     var playerOneScore = 0;
-    
-    function changeState() 
+
+    function changeState()
     {
         if (state === 0) {  /* Mid state */
             $('#main_wings_static').css('display', 'none');
@@ -34,7 +34,7 @@ function MainPage ()
         }
     }
 
-    function beginStateChange() 
+    function beginStateChange()
     {
         timer = setInterval (changeState, 500);
         if (settingDialog.themeMusicOn) {
@@ -42,14 +42,14 @@ function MainPage ()
         }
     }
 
-    
+
     function hideMiscBoardItems()
     {
         $('#game_score').hide();
         $('#game_honey_container').hide();
     }
 
-    function handleOnePlayerGameOver() 
+    function handleOnePlayerGameOver()
     {
         if (singlePlayerGameOverDialog === undefined)
             singlePlayerGameOverDialog = new SinglePlayerGameOverDialog();
@@ -57,7 +57,7 @@ function MainPage ()
         singlePlayerGameOverDialog.show();
     }
 
-    function startOnePlayerGame() 
+    function startOnePlayerGame()
     {
         if (wordGame === undefined) {
             wordGame = new Game();
@@ -68,7 +68,7 @@ function MainPage ()
             e.style.display = "none";
             $('#game_honeycomb_grey, #game_go_window_1player').css("display", "inline");
             e.removeEventListener('webkitAnimationEnd', arguments.callee, false);
-        }); 
+        });
         wordGame.onGameOver (handleOnePlayerGameOver);
     }
 
@@ -92,14 +92,14 @@ function MainPage ()
             $("#game_player2_score").html(wordGame.score).show();
 
             var winner = 0;
-            // both player 1 and 2 are done with games. 
+            // both player 1 and 2 are done with games.
             // Compare scores and show the winner.
             if (wordGame.score > playerOneScore) {
                 winner = 2;
             } else if (wordGame.score  < playerOneScore) {
                 winner = 1;
             }
-           
+
             if (dualPlayersGameOverDialog === undefined)
                 dualPlayersGameOverDialog = new DualPlayersGameOverDialog();
             hideMiscBoardItems();
@@ -107,7 +107,7 @@ function MainPage ()
 	}
     }
 
-    function startTwoPlayersGame() 
+    function startTwoPlayersGame()
     {
         playerId = 1;
         if (wordGame === undefined) {
@@ -116,14 +116,14 @@ function MainPage ()
 	$("#game_player1_label, #game_player1_score, #game_player2_label, #game_player2_score").hide();
 	var beeBuzzOff = $('.game_bee_buzz_off');
         beeBuzzOff.css("display", "inline");
-       
+
         var e = document.getElementById('game_bee_buzz_off_left');
         e.addEventListener('webkitAnimationEnd', function () {
             beeBuzzOff.css("display", "none");
             $('#game_go_2players_id').html("PLAYER " + playerId);
             $('#game_honeycomb_grey, #game_go_2players').css("display", "inline");
             e.removeEventListener('webkitAnimationEnd', arguments.callee, false);
-        }); 
+        });
         wordGame.onGameOver (handleTwoPlayersGameOver);
     }
 
@@ -142,7 +142,7 @@ function MainPage ()
         $('#main_page').show();
     }
 
-    function init () 
+    function init ()
     {
         license_init("license", "main_page");
         settingDialog = new SettingDialog;
@@ -196,10 +196,9 @@ function MainPage ()
     init();
 }
 
-window.addEventListener('load', function () 
+window.addEventListener('load', function ()
 {
     "use strict";
     scaleBody(document.getElementsByTagName("body")[0], 720);
-    webappCommon.useMouseEvents("mouseover");
     mainPage = new MainPage();
 });
