@@ -232,16 +232,35 @@ function Game() {
         return true;
     }
 
-    this.handleMouseDown = function handleMouseDown(element) 
+    function handleMouseUp()
+    {
+        wordBegin = false;
+        $(document).off('mouseup touchend', handleMouseUp);
+        if (moves.length > 0) {
+            validateSelectedWord(moves);
+            if (lettersFound === numOfChars) {
+                puzzlesCompleted += 1;
+                if (puzzlesCompleted === 3) {
+                    showLevelCompletedMessage();
+                } else {
+                    setTimeout ('wordGame.newWordPuzzle()', 1000);
+                }
+            }
+        }
+    }
+
+    // "element" is a number which can be used to locate an element,
+    // rather than the actual DOM element
+    this.handleMouseDown = function (element)
     {
         wordBegin = true;
         moves = [];
         validateMove(element);
         $('#game_honeycomb_' + element).addClass('game_honeycomb_selected');
-        document.addEventListener('mouseup', handleMouseUp);
+        $(document).on('mouseup touchend', handleMouseUp);
     }
 
-    this.handleMouseOver = function handleMouseOver(element) 
+    this.handleMouseOver = function (element)
     {
         if (wordBegin) {
             if (validateMove(element) === true)  {
@@ -262,23 +281,6 @@ function Game() {
             e.hide();
             nextLevel();
         }, 3000);
-    }
-
-    function handleMouseUp()
-    {
-        wordBegin = false;
-        document.removeEventListener('mouseup', handleMouseUp);
-        if (moves.length > 0) {
-            validateSelectedWord(moves);
-            if (lettersFound === numOfChars) { 
-                puzzlesCompleted += 1;
-                if (puzzlesCompleted === 3) {
-                    showLevelCompletedMessage();
-                } else {
-                    setTimeout ('wordGame.newWordPuzzle()', 1000); 
-                }
-            }
-        }
     }
 
     function updateHoneyLevel(amount)
@@ -327,12 +329,10 @@ function Game() {
                            ' game_honeycomb_column' + j + '"></div>';
                     $('#game_honeycombs').append(html);
 
-                    html = '<div id="game_letter_' + h + 
-                           '" class="game_letter game_honeycomb_row' + i + 
-                           ' game_letter_column' + j + 
-                           '" onmousedown=wordGame.handleMouseDown(' + h + 
-                           ') onmouseover=wordGame.handleMouseOver(' + h + 
-                           ')></div>';
+                    html = '<div id="game_letter_' + h +
+                           '" class="game_letter game_honeycomb_row' + i +
+                           ' game_letter_column' + j + '"' +
+                           ' data-element-number="' + h + '"></div>';
                     $('#game_honeycombs').append(html);
 
                     html =  '<div id="bee_' + h +
@@ -343,12 +343,30 @@ function Game() {
                     html =  '<div id="wings_' + h +
                             '" class="game_bee_wings game_bee_wings_row' + i +
                             ' game_bee_wings_column' + j + '"></div>';
+
                     $('#game_bees').append(html);
 
                     h++;
                 } // end if
             }  // end for
         } // end for
+
+        // add delegated event handlers for touch/mouse events
+        $('#game_honeycombs').delegate('[data-element-number]', 'mousedown', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var elementNumber = $(e.target).attr('data-element-number');
+            wordGame.handleMouseDown(elementNumber);
+        });
+
+        $('#game_honeycombs').delegate('[data-element-number]', 'mouseover', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var elementNumber = $(e.target).attr('data-element-number');
+            wordGame.handleMouseOver(elementNumber);
+        });
     }
 
     function init()
