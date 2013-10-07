@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012, Intel Corporation.
  *
- * This program is licensed under the terms and conditions of the 
+ * This program is licensed under the terms and conditions of the
  * Apache License, version 2.0.  The full text of the Apache License is at
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -32,7 +32,7 @@ function Game() {
     var puzzlesCompleted;
     var gameClock;
 
-    function readWordList() 
+    function readWordList()
     {
         // read words list from file
         var file = "data/words.json";
@@ -55,7 +55,7 @@ function Game() {
                 continue;
             wordsUsed[i] = true;    // mark it used.
             return wordsDataList[i];
-        }   
+        }
     }
 
     function wordObject (word, cells)
@@ -66,8 +66,8 @@ function Game() {
 
     function getWords()
     {
-        var nChars = 17; 
-        var words = ""; 
+        var nChars = 17;
+        var words = "";
         myWordList = [];
 
         var n = 0;
@@ -84,12 +84,12 @@ function Game() {
                 var wordObj = new wordObject(word, cells);
                 myWordList.push(wordObj);
                 nChars -= len;
-            }   
-        }   
+            }
+        }
         return words;
     }
 
-    this.onGameOver = function onGameOver(callback) 
+    this.onGameOver = function onGameOver(callback)
     {
         handleGameOver = callback;
     }
@@ -141,7 +141,7 @@ function Game() {
     function wrongGuess (cells)
     {
         $("#wrong_guess").fadeIn();
-        setTimeout (function() { 
+        setTimeout (function() {
             $("#wrong_guess").fadeOut();
             unSelectCells(cells);
         }, 1000);
@@ -171,7 +171,7 @@ function Game() {
         }
         return true;
     }
- 
+
     function validateSelectedWord (cells)
     {
         var i;
@@ -202,7 +202,7 @@ function Game() {
             }
         }
         wrongGuess(cells);
-    } 
+    }
 
     function validateMove (e)
     {
@@ -232,16 +232,34 @@ function Game() {
         return true;
     }
 
-    this.handleMouseDown = function handleMouseDown(element) 
+    function handleMouseUp()
+    {
+        wordBegin = false;
+        if (moves.length > 0) {
+            validateSelectedWord(moves);
+            if (lettersFound === numOfChars) {
+                puzzlesCompleted += 1;
+                if (puzzlesCompleted === 3) {
+                    showLevelCompletedMessage();
+                } else {
+                    setTimeout ('wordGame.newWordPuzzle()', 1000);
+                }
+            }
+        }
+    }
+
+    // "element" is a number which can be used to locate an element,
+    // rather than the actual DOM element
+    this.handleMouseDown = function (element)
     {
         wordBegin = true;
         moves = [];
         validateMove(element);
         $('#game_honeycomb_' + element).addClass('game_honeycomb_selected');
-        document.addEventListener('mouseup', handleMouseUp);
+        $(document).one('mouseup touchend', handleMouseUp);
     }
 
-    this.handleMouseOver = function handleMouseOver(element) 
+    this.handleMouseOver = function (element)
     {
         if (wordBegin) {
             if (validateMove(element) === true)  {
@@ -252,33 +270,16 @@ function Game() {
 
     function showLevelCompletedMessage ()
     {
-        
+
         gameClock.reset();
         var e = $('#game_level_completed_msg');
         var message = "Level " + self.level + " Completed!";
         e.html(message);
         e.show();
-        setTimeout (function() { 
+        setTimeout (function() {
             e.hide();
             nextLevel();
         }, 3000);
-    }
-
-    function handleMouseUp()
-    {
-        wordBegin = false;
-        document.removeEventListener('mouseup', handleMouseUp);
-        if (moves.length > 0) {
-            validateSelectedWord(moves);
-            if (lettersFound === numOfChars) { 
-                puzzlesCompleted += 1;
-                if (puzzlesCompleted === 3) {
-                    showLevelCompletedMessage();
-                } else {
-                    setTimeout ('wordGame.newWordPuzzle()', 1000); 
-                }
-            }
-        }
     }
 
     function updateHoneyLevel(amount)
@@ -320,19 +321,17 @@ function Game() {
         var html;
         for (j = 1; j < 6; j++) {
             for (i = 1; i < 8; i++) {
-                if ((((i % 2) != 0) && ((j % 2) === 0)) || 
+                if ((((i % 2) != 0) && ((j % 2) === 0)) ||
                     (((i % 2) === 0) && ((j % 2) != 0))) {
-                    html = '<div id="game_honeycomb_' + h + 
-                           '" class="game_honeycomb game_honeycomb_row' + i + 
+                    html = '<div id="game_honeycomb_' + h +
+                           '" class="game_honeycomb game_honeycomb_row' + i +
                            ' game_honeycomb_column' + j + '"></div>';
                     $('#game_honeycombs').append(html);
 
-                    html = '<div id="game_letter_' + h + 
-                           '" class="game_letter game_honeycomb_row' + i + 
-                           ' game_letter_column' + j + 
-                           '" onmousedown=wordGame.handleMouseDown(' + h + 
-                           ') onmouseover=wordGame.handleMouseOver(' + h + 
-                           ')></div>';
+                    html = '<div id="game_letter_' + h +
+                           '" class="game_letter game_honeycomb_row' + i +
+                           ' game_letter_column' + j + '"' +
+                           ' data-element-number="' + h + '"></div>';
                     $('#game_honeycombs').append(html);
 
                     html =  '<div id="bee_' + h +
@@ -343,12 +342,55 @@ function Game() {
                     html =  '<div id="wings_' + h +
                             '" class="game_bee_wings game_bee_wings_row' + i +
                             ' game_bee_wings_column' + j + '"></div>';
+
                     $('#game_bees').append(html);
 
                     h++;
                 } // end if
             }  // end for
         } // end for
+
+        // add delegated event handlers for touch/mouse events
+        $('#game_honeycombs').delegate('[data-element-number]', 'touchstart mousedown', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var elementNumber = $(e.target).attr('data-element-number');
+            wordGame.handleMouseDown(elementNumber);
+        });
+
+        $('#game_honeycombs').delegate('[data-element-number]', 'mouseover', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var elementNumber = $(e.target).attr('data-element-number');
+            wordGame.handleMouseOver(elementNumber);
+        });
+
+        // for touch moves, we have to figure out the element under the touch
+        // using a different mechanism from mouseover
+        $('#game_honeycombs').delegate('[data-element-number]', 'touchmove', function (e) {
+            // ignore multi-touch events
+            if (e.originalEvent.changedTouches.length !== 1) {
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            // get the element under the touch
+            var touch = e.originalEvent.changedTouches[0];
+
+            var elt = document.elementFromPoint(touch.pageX, touch.pageY);
+
+            // only count the move if it corresponds with one of
+            // the elements we're interested in
+            var elementNumber = $(elt).attr('data-element-number');
+
+            if (elementNumber) {
+                wordGame.handleMouseOver(elementNumber);
+            }
+        });
     }
 
     function init()
@@ -360,7 +402,7 @@ function Game() {
         gameClock = new GameClock(180);
         gameClock.onClockExpired(handleClockExpire);
         gameClock.onEachClockTick(handleClockTick);
-      
+
         // hook up the go button for 1 player
         $('#game_go_window_label_go').click (function () {
             $('#game_go_window_1player').fadeOut();
@@ -369,7 +411,7 @@ function Game() {
                 sounds.beesAppear.play();
             }
             setTimeout ('wordGame.newGame()', 4500);
-        });     
+        });
 
         // hook up the go button for 2 players
         $('#game_go_2players_go').click (function () {
@@ -380,19 +422,19 @@ function Game() {
                 sounds.beesAppear.play();
             }
             setTimeout ('wordGame.newGame()', 4500);
-        });     
+        });
 
         // hook up the setting button
         $('#game_setting').click (function() {
             gameClock.pause();
             settingDialog.onDialogClose(resume);
             settingDialog.open();
-        });     
+        });
 
         // hook up the pause button
         $('#game_pause_btn').click (function () {
             pauseDialog.open();
-        }); 
+        });
     }
 
     this.reset = function reset() {
@@ -470,9 +512,9 @@ function Game() {
                 var s = "&emsp;";
                 if (j === 0)
                     s = w.charAt(j);
-                   
-                html = '<div id="game_word' + (i+1) + '_char' + (j+1) + 
-                       '" class="game_answerText" style="' + top + 
+
+                html = '<div id="game_word' + (i+1) + '_char' + (j+1) +
+                       '" class="game_answerText" style="' + top +
                         ' left: ' + (j * 25 + 5) + 'px;">' + s + '</div>';
                 e.append(html);
             }
