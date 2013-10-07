@@ -352,7 +352,7 @@ function Game() {
         } // end for
 
         // add delegated event handlers for touch/mouse events
-        $('#game_honeycombs').delegate('[data-element-number]', 'mousedown', function (e) {
+        $('#game_honeycombs').delegate('[data-element-number]', 'touchstart mousedown', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -366,6 +366,31 @@ function Game() {
 
             var elementNumber = $(e.target).attr('data-element-number');
             wordGame.handleMouseOver(elementNumber);
+        });
+
+        // for touch moves, we have to figure out the element under the touch
+        // using a different mechanism from mouseover
+        $('#game_honeycombs').delegate('[data-element-number]', 'touchmove', function (e) {
+            // ignore multi-touch events
+            if (e.originalEvent.changedTouches.length !== 1) {
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            // get the element under the touch
+            var touch = e.originalEvent.changedTouches[0];
+
+            var elt = document.elementFromPoint(touch.pageX, touch.pageY);
+
+            // only count the move if it corresponds with one of
+            // the elements we're interested in
+            var elementNumber = $(elt).attr('data-element-number');
+
+            if (elementNumber) {
+                wordGame.handleMouseOver(elementNumber);
+            }
         });
     }
 
