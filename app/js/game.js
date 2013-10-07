@@ -235,7 +235,6 @@ function Game() {
     function handleMouseUp()
     {
         wordBegin = false;
-        $(document).off('mouseup touchend', handleMouseUp);
         if (moves.length > 0) {
             validateSelectedWord(moves);
             if (lettersFound === numOfChars) {
@@ -257,7 +256,7 @@ function Game() {
         moves = [];
         validateMove(element);
         $('#game_honeycomb_' + element).addClass('game_honeycomb_selected');
-        $(document).on('mouseup touchend', handleMouseUp);
+        $(document).one('mouseup touchend', handleMouseUp);
     }
 
     this.handleMouseOver = function (element)
