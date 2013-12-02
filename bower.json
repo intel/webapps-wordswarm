@@ -8,7 +8,7 @@
   ],
   "dependencies": {
     "jquery": "~2.0.3",
-    "lato-black-font": "http://www.ffonts.net/Lato-Black.font.zip",
-    "oswald-font": "http://ff.static.1001fonts.net/o/s/oswald.regular.ttf"
+    "lato-black-font": "http://themes.googleusercontent.com/static/fonts/lato/v6/BVtM30trf7q_jfqYeHfjtA.woff",
+    "oswald-font": "http://themes.googleusercontent.com/static/fonts/oswald/v7/-g5pDUSRgvxvOl5u-a_WHw.woff"
   }
 }

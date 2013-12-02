@@ -9,12 +9,12 @@
 
 @font-face {
     font-family: 'Oswald';
-    src: url(../lib/oswald-font/index.ttf) format('truetype');
+    src: url(../lib/oswald-font/index.woff) format(truetype);
 }
 
 @font-face {
     font-family: 'Lato Black';
-    src: url(../lib/lato-black-font/lato/Lato-Black.ttf) format('truetype');
+    src: url(../lib/lato-black-font/index.woff) format(truetype);
 }
 
 body {
