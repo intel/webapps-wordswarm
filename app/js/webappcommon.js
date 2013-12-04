@@ -35,11 +35,11 @@
 *       val (float) - audio level from 0 to 1.0, 0 for mute, 1 for full volume
 *
 * TextScroller Functionality: 
-*    Function name: webappCommon.createTextScroller(divid, file, style)
+*    Function name: webappCommon.createTextScroller(divid)
 *    Description: 
-*       returns an object which handles autoscrolling a text file within a
-*       div element (such as a README or LICENSE). See the definition of the
-*       webappCommon.TextScroller object below.
+*       returns an object which handles autoscrolling text within a
+*       div element. See the definition of the webappCommon.TextScroller
+*       object below.
 *
 * Touch to Mouse Functionality: 
 *    Function name: webappCommon.isMouseOrTouch()
@@ -77,8 +77,8 @@ var webappCommon = {
             }
         }
     },
-    createTextScroller: function(divid, file, style) {
-        return new webappCommon.TextScroller(divid, file, style);
+    createTextScroller: function(divid, style) {
+        return new webappCommon.TextScroller(divid);
     },
     isMouseOrTouch: function() {
         if(("ontouchstart" in window)&&
@@ -265,10 +265,6 @@ webappCommon.Sound.prototype.unmute = function() {
 *    gets to the end, pausing for a few seconds at top and bottom.
 * Required arguments: 
 *    divid (string) - the id of the div element you want the text to be in
-*    file (string) - the file path of the text file (e.g. "README.txt")
-* Optional arguments:
-*    style (string) - css styling for the text, will be appended to the style
-*        tag of the container that gets inserted into divid.
 *
 * [Member functions]
 *    Function name: start(downspeed, upspeed, pausetime)
@@ -284,48 +280,13 @@ webappCommon.Sound.prototype.unmute = function() {
 *        stops the autoscroll, should be called if the text isn't in view since
 *        timers waste a bit of cpu
 ******************************************************************************/
-webappCommon.TextScroller = function(divid, file, style)
+webappCommon.TextScroller = function(divid)
 {
     var self = this;
     var id = "webapp_textscroll";
-    var css = "position: relative;";
-    var textstyle = "font: 25px/100% Arial, Helvetica, sans-serif;text-align: center;";
-    if(style == undefined)
-    {
-        css += "font: 25px/100% Arial, Helvetica, sans-serif;text-align: center;";
-    }
-    else
-    {
-        css += style;
-    }
-    var element = '<div id="'+id+'" style="'+css+'"></div>';
 
     this.parentdiv = document.getElementById(divid);
-    this.parentdiv.innerHTML = element;
     this.textview = document.getElementById(id);
-
-    var request = new XMLHttpRequest();
-    request.open("GET", file, false);
-    request.onload = function(e) {
-        var text = this.responseText;
-        text = text.replace("<","&lt;");
-        text = text.replace(">","&gt;");
-        var lines = text.split("\n");
-        lines[0] = "<br><br><h1>"+lines[0]+"</h1>";
-        for(var i in lines)
-        {
-            if(lines[i].match(/--------------------/))
-            {
-                lines[i] = "";
-            }
-            else
-            {
-                lines[i] += "<br>";
-            }
-        }
-        self.textview.innerHTML = lines.join("\n");
-    }
-    request.send();
 }
 
 webappCommon.TextScroller.prototype.start = function(downspeed, upspeed, pausetime) {
