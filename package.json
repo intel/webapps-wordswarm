@@ -1,6 +1,6 @@
 {
   "name": "Wordswarm",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A fast-paced word game.",
   "main": "app/index.html",
   "scripts": {
