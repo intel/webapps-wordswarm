@@ -1,0 +1,13 @@
+{
+  "name": "Word Swarm",
+  "short_name": "Word Swarm",
+  "icons": [
+    {
+      "src": "images/icon_300.png",
+      "sizes": "300x300",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone"
+}

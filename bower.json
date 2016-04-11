@@ -9,6 +9,8 @@
   "dependencies": {
     "jquery": "~2.0.3",
     "lato-black-font": "http://themes.googleusercontent.com/static/fonts/lato/v6/BVtM30trf7q_jfqYeHfjtA.woff",
-    "oswald-font": "http://themes.googleusercontent.com/static/fonts/oswald/v7/-g5pDUSRgvxvOl5u-a_WHw.woff"
+    "oswald-font": "http://themes.googleusercontent.com/static/fonts/oswald/v7/-g5pDUSRgvxvOl5u-a_WHw.woff",
+    "platinum-sw": "PolymerElements/platinum-sw#^1.3.0",
+    "polymer": "Polymer/polymer#^1.4.0"
   }
 }
